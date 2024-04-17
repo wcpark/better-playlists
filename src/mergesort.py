@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import time
+
 
 # Slides from class used as reference
 # Merges two subarray of array
@@ -56,8 +58,16 @@ def printArray(array):
 
 
 def main():
+    # Example use
     originalArray = [8.6, 23.2, 6.73, 5.33, 0.72, 0.99]
+
+    start_time = time.time()
     mergeSort(originalArray, 0, len(originalArray) - 1)
+    end_time = time.time()
+
+    sort_time = end_time - start_time
+
+    print("Time taken for merge sort:", sort_time, "seconds")
     print("Sorted array:")
     printArray(originalArray)
 
