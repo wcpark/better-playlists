@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import time
+
 
 # Slides from class used as reference
 # Function to swap position of elements
@@ -43,8 +45,16 @@ def printArray(originalArray):
 
 
 def main():
+    # Example use
     data = [0.39, 6.13, 22.89, 3.14, 0.12, 5.73, 1.00]
+
+    start_time = time.time()
     quickSort(data, 0, len(data) - 1)
+    end_time = time.time()
+
+    sort_time = end_time - start_time
+
+    print("Time taken for quick sort:", sort_time, "seconds")
     print("Sorted array: ", end="")
     printArray(data)
 
