@@ -1,40 +1,66 @@
 import json
+import os
+import time
 
-with open('data/mpd.slice.1000-1999.json', 'r') as f:
-    data = json.load(f)
-
-
-def percentAinB(set1, playlist2):
-    set2 = set()
-
-    for track in playlist2['tracks']:
-        set2.add(track['track_name'])
-
-    set_intersection = set1.intersection(set2)
-
-    percentAinB = float(len(set_intersection)) /  len(set2)
-
-    return percentAinB
-
-def getPlaylist(data, name):
+# these 2 functions are just for testing
+def getPlaylistTracklist(data, name):
     for playlist in data['playlists']:
         if(playlist['name'] == name):
-            return playlist
+            list = []
+            for track in playlist['tracks']:
+                list.append(track['track_uri'])
+
+            return list
+        
+def GetTrackSet(playlist):
+    setA = set()
+
+    for track in playlist['tracks']:
+        setA.add(track['track_uri'])
+
+    return setA
 
 
-########################
 
-playlistA = getPlaylist(data, "New music")
 
-setA = set()
 
-for track in playlistA['tracks']:
-    setA.add(track['track_name'])
+def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
+    files = os.listdir('Downloads/spotify_million_playlist_dataset/data')
 
-dictionary = {}
+    # not use this?
+    # tracks_size = len(tracks) 
+    setA = set(tracks)
+    dictionary = {}
 
-for playlist in data['playlists']:
-    if(playlist['num_tracks'] > playlistA['num_tracks']):
-        dictionary[playlist['name']] = percentAinB(setA, playlist)
+    # num_playlists = 0 
+    
+    for i in range(NumFiles):
+        with open('Downloads/spotify_million_playlist_dataset/data/' + files[i], 'r') as f:
+            data = json.load(f)
 
-print(dictionary)
+        for playlist in data['playlists']:
+            # num_playlists += 1 
+            setB = GetTrackSet(playlist)
+            num_matches = len(setA.intersection(setB))
+            match_percent = (float(num_matches) / len(setA)) * 100
+            dictionary[playlist['pid']] = match_percent
+
+    # print()
+    # print(num_playlists) 
+    # print()
+    # return dictionary
+
+
+# with open('Downloads/spotify_million_playlist_dataset/data/mpd.slice.0-999.json', 'r') as f:
+#     data = json.load(f)
+
+# track_list = getPlaylistTracklist(data, "Throwbacks")
+# print(len(track_list))
+
+# start_time = time.time()
+
+# dict = TheActualThing(track_list, 10)
+# print(dict.items())
+# #print(dict)
+
+# print("--- %s seconds ---" % (time.time() - start_time))
