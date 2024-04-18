@@ -45,6 +45,8 @@ def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
             match_percent = (float(num_matches) / len(setA)) * 100
             dictionary[playlist['pid']] = match_percent
 
+    return dictionary.items()
+
     # print()
     # print(num_playlists) 
     # print()
