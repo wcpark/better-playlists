@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Playlists</title>
+    <style>
+        body {
+            background-color: black;
+            color:#cccccc;
+            font-family: 'Optima', serif; /* Change the font family here */
+            text-shadow: 2px 2px 4px rgba(18, 48, 123, 0.5); /* Add text shadow */
+          }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My App</h1>
+    </header>
+    <main>
+        <h2>Your Playlists</h2>
+        {% if playlists_html %}
+            {{ playlists_html | safe }}
+        {% else %}
+            <p>No playlists found.</p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2024 My App</p>
+    </footer>
+</body>
+</html>
