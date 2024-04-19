@@ -2,7 +2,7 @@ import json
 import os
 import time
 
-# these 2 functions are just for testing
+# just for testing with string playlist name from dataset
 def getPlaylistTracklist(data, name):
     for playlist in data['playlists']:
         if(playlist['name'] == name):
@@ -12,6 +12,11 @@ def getPlaylistTracklist(data, name):
 
             return list
         
+
+
+
+
+
 def GetTrackSet(playlist):
     setA = set()
 
@@ -19,9 +24,6 @@ def GetTrackSet(playlist):
         setA.add(track['track_uri'])
 
     return setA
-
-
-
 
 
 def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
@@ -45,7 +47,7 @@ def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
             match_percent = (float(num_matches) / len(setA)) * 100
             dictionary[playlist['pid']] = match_percent
 
-    return dictionary.items()
+    return list(dictionary.items())
 
     # print()
     # print(num_playlists) 
