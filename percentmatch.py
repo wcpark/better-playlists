@@ -27,7 +27,7 @@ def GetTrackSet(playlist):
 
 
 def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
-    files = os.listdir('Downloads/spotify_million_playlist_dataset/data')
+    files = os.listdir('data')
 
     # not use this?
     # tracks_size = len(tracks) 
@@ -37,7 +37,7 @@ def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
     # num_playlists = 0 
     
     for i in range(NumFiles):
-        with open('Downloads/spotify_million_playlist_dataset/data/' + files[i], 'r') as f:
+        with open('data' + files[i], 'r') as f:
             data = json.load(f)
 
         for playlist in data['playlists']:
