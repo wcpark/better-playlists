@@ -4,40 +4,47 @@ import random
 import time
 
 
-# Slides from class used as reference
 # Function to swap position of elements
 def swap(originalList, i, j):
     originalList[i], originalList[j] = originalList[j], originalList[i]
 
 
-# Function to partition the list on the basis of pivot element
+# Function to perform three-way partitioning on list; three-way partitioning was selected to
+# deal with worst-case of many duplicate elements leading to RecursionError
 def partition(originalList, low, high):
     # Randomly select the pivot element to minimize chance of worst-case
     pivot_index = random.randint(low, high)
     swap(originalList, low, pivot_index)
     pivot = originalList[low][1]
-    up = low
-    down = high
 
-    while up < down:
-        while up <= high and originalList[up][1] <= pivot:
-            up += 1
-        while down >= low and originalList[down][1] > pivot:
-            down -= 1
-        if up < down:
-            swap(originalList, up, down)
-    swap(originalList, low, down)
-    return down
+    # Pointers for three-way partitioning, dividing list into three regions:
+    # elements less than pivot, equal to pivot, and greater than pivot
+    lowPtr = low
+    highPtr = high
+    currentIndex = low
+
+    while currentIndex <= highPtr:
+        if originalList[currentIndex][1] < pivot:
+            swap(originalList, currentIndex, lowPtr)
+            lowPtr += 1
+            currentIndex += 1
+        elif originalList[currentIndex][1] > pivot:
+            swap(originalList, currentIndex, highPtr)
+            highPtr -= 1
+        else:
+            currentIndex += 1
+
+    return lowPtr, highPtr
 
 
 def quickSort(originalList, low, high):
     if low < high:
-        pivot = partition(originalList, low, high)
-        quickSort(originalList, low, pivot - 1)
-        quickSort(originalList, pivot + 1, high)
+        leftPartition, rightPartition = partition(originalList, low, high)
+        quickSort(originalList, low, leftPartition - 1)
+        quickSort(originalList, rightPartition + 1, high)
 
 
-# Function to print elements of an list
+# Function to print elements of a list
 def printList(originalList):
     for i in originalList:
         print(i, end=" ")
