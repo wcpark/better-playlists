@@ -61,7 +61,7 @@
 
 // export default App;
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -91,23 +91,13 @@ function App() {
   };
 
   const handleSearch = () => {
-    // Here you can implement logic to handle the search query
-    // For simplicity, let's just set the output to the search query
+    // Implement logic to handle the search query
     setOutput(searchQuery);
   };
 
-  useEffect(() => {
-    fetch("/members").then(
-      res => res.json()
-    ).then(
-      data => {
-        console.log(data)
-      }
-    )
-  }, [])
-
   return (
     <div className="App">
+      <div className="top-third"></div>
       <div className="header">
         <h1>Better Playlists</h1>
       </div>

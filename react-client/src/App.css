@@ -38,7 +38,7 @@
 } */
 
 
-.App {
+/* .App {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,6 +47,71 @@
   background-color: black;
   color: white;
 }
+
+.header {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+}
+
+.header h1 {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.search-container {
+  position: absolute;
+  top: 250px;
+  left: 20px;
+}
+
+.output-container {
+  position: absolute;
+  top: 20px;
+  right: 800px;
+}
+
+input[type="text"] {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+button {
+  padding: 13px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+} */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: black;
+  color: white;
+  background-image: url('image.jpg');
+  background-size: cover;
+  background-position: center top;
+}
+
+.top-third {
+  height: 33%;
+  width: 33%;
+}
+
 
 .header {
   position: absolute;
