@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Track Names</title>
+    <style>
+        body {
+            background-color: black;
+            color: #cccccc;
+            font-family: 'Optima', serif; /* Change the font family here */
+            text-shadow: 2px 2px 4px rgba(18, 48, 123, 0.5); /* Add text shadow */
+        }
+
+        /* Style for track names */
+        .track-name {
+            margin-bottom: 10px; /* Add space between track names */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>List of Track Names</h1>
+    </header>
+    <main>
+        {% if track_names %}
+            <div class="track-names">
+                {% for track_name in track_names %}
+                    <p class="track-name">{{ track_name }}</p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No track names found.</p>
+        {% endif %}
+
+        <h2>JSON Data</h2>
+        {% if json_data %}
+            <div class="json-data">
+                <pre>{{ json_data | safe }}</pre>
+            </div>
+        {% else %}
+            <p>No JSON data available.</p>
+        {% endif %}
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

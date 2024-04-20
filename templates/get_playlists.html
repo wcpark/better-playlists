@@ -9,24 +9,75 @@
             background-color: black;
             color:#cccccc;
             font-family: 'Optima', serif; /* Change the font family here */
-            text-shadow: 2px 2px 4px rgba(18, 48, 123, 0.5); /* Add text shadow */
-          }
+            text-shadow: 2px 2px 4px rgba(67, 155, 226, 0.5); /* Add text shadow */
+        }
+        /* Style for clickable buttons */
+        .playlist-button {
+            background-color: #72a6de; /* Blue color for button background */
+            color: #000000; /* White color for button text */
+            padding: 5px 10px; /* Add padding to the button */
+            border: none; /* Remove border */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Add rounded corners */
+            margin-bottom: 10px; /* Add space between buttons */
+            display: block; /* Display buttons as block elements */
+            width: fit-content; /* Adjust button width based on content */
+        }
+
+        /* Style for the "Go" button */
+        #go-button {
+            background-color: #28a745; /* Green color for button background */
+            margin-top: 10px; /* Add space above the button */
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to My App</h1>
+        <h1>Select a Playlist and Press Go</h1>
     </header>
     <main>
         <h2>Your Playlists</h2>
-        {% if playlists_html %}
-            {{ playlists_html | safe }}
-        {% else %}
-            <p>No playlists found.</p>
-        {% endif %}
+        <div id="playlist-container">
+            {% for name, url, id in playlists_info %}
+                <p>
+                    <a href="#" onclick="getTracks('{{ id }}'); return false;">{{ name }}</a>
+                    <!-- Call the getTracks function with the playlist ID when clicked -->
+                </p>
+            {% endfor %}
+        </div>
+        <button id="go-button" onclick="handleGoButtonClick()">Go</button>
+        <!-- Add a "Go" button with onclick event -->
     </main>
     <footer>
-        <p>&copy; 2024 My App</p>
     </footer>
+
+    <script>
+        // Function to get tracks for a playlist
+        function getTracks(playlistId) {
+            fetch('/get_tracks/' + playlistId)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Playlist tracks retrieved:', data.tracks_info);
+                    // Store or process the retrieved tracks information as needed
+                })
+                .catch(error => console.error('Error getting tracks:', error));
+        }
+
+        // Function to handle the "Go" button click
+        function handleGoButtonClick() {
+            fetch('/list_tracks_info')
+                .then(response => {
+                    console.log(response); // Log the response for debugging
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        // Redirect manually to the response URL
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(error => console.error('Error fetching track names:', error));
+        }
+    </script>
 </body>
 </html>
