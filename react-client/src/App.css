@@ -60,8 +60,9 @@
 }
 
 .search-container {
-  flex: 1;
-  margin-right: 20px;
+  position: absolute;
+  top: 250px;
+  left: 20px;
 }
 
 .output-container {
@@ -91,45 +92,3 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-
-
-
-
-
-
-
-/* .App {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  padding: 20px;
-}
-
-.search-container {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.output-container {
-  flex: 2;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-} */
