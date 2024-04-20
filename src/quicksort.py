@@ -12,7 +12,9 @@ def swap(originalList, i, j):
 
 # Function to partition the list on the basis of pivot element
 def partition(originalList, low, high):
-    # Select the pivot element
+    # Randomly select the pivot element to minimize chance of worst-case
+    pivot_index = random.randint(low, high)
+    swap(originalList, low, pivot_index)
     pivot = originalList[low][1]
     up = low
     down = high
