@@ -85,7 +85,7 @@ def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
             # num_playlists += 1 
             setB = GetTrackSet(playlist)
             num_matches = len(setA.intersection(setB))
-            match_percent = (float(num_matches) / len(setA)) * 100
+            match_percent = round((float(num_matches) / len(setA)) * 100)
             dictionary[playlist['pid']] = match_percent
 
     return list(dictionary.items())
@@ -93,22 +93,21 @@ def TracksToDictionary(tracks, NumFiles): # passes in numfiles for testing
 
 
 
+'''
+example usage
+with open('Downloads/spotify_million_playlist_dataset/data/mpd.slice.0-999.json', 'r') as f:
+    data = json.load(f)
 
-# example usage
-# with open('Downloads/spotify_million_playlist_dataset/data/mpd.slice.0-999.json', 'r') as f:
-#     data = json.load(f)
+track_list = getPlaylistTracklist(data, "Throwbacks")
+print(len(track_list))
 
-# track_list = getPlaylistTracklist(data, "Throwbacks")
-# print(len(track_list))
+start_time = time.time()
+dict = TracksToDictionary(track_list, 10)
+print("--- %s seconds ---" % (time.time() - start_time))
 
-# start_time = time.time()
-# dict = TracksToDictionary(track_list, 10)
-# print("--- %s seconds ---" % (time.time() - start_time))
-
-
+______________________________________________________________________________________________
 
 #example usage of get_playlist_names function
-'''
 entries = [(17491, 100.0), (17089, 100.0), (121, 100.0), (11209, 100.0), (15011, 100.0), (10161, 100.0), (13381, 100.0), (13034, 100.0), (16994, 100.0), (11981, 50.0)]
 
 playlist_names, track_sets = get_playlist_data(entries)

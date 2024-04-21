@@ -10,7 +10,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='Templates', static_folder='Templates')
 app.config['SECRET_KEY'] = 'SECRETKEY'
 
 
@@ -50,10 +50,14 @@ def home():
 
 @app.route('/callback')
 def callback():
-  print("Request URL:", request.url)
-  sp_oauth.get_access_token(request.args['code'])
-  return redirect(url_for('get_playlists'))
-
+  error = request.args.get('error')
+  if error == 'access_denied':
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
+  else:
+    print("Request URL:", request.url)
+    sp_oauth.get_access_token(request.args['code'])
+    return redirect(url_for('get_playlists'))
 
 
 @app.route('/get_playlists')
@@ -62,9 +66,22 @@ def get_playlists():
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
-  # get current users playlists and grab the specific data for use
+  # get current users playlists
   playlists = sp.current_user_playlists()
-  playlists_info = [(pl['name'], pl['external_urls']['spotify'], pl['id']) for pl in playlists['items']]
+  playlists_info = []
+
+  for pl in playlists['items']:
+    playlist_id = pl['id']
+    playlist_name = pl['name']
+    playlist_url = pl['external_urls']['spotify']
+
+    # Retrieve tracks for the playlist
+    playlist_tracks = sp.playlist_tracks(playlist_id)
+
+    # Extract track names
+    track_names = [track['track']['name'] for track in playlist_tracks['items']][:15]
+
+    playlists_info.append((playlist_name, playlist_url, playlist_id, track_names))
 
   return render_template('get_playlists.html', playlists_info=playlists_info)
 

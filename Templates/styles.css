@@ -1,0 +1,83 @@
+body {
+  background-color: black;
+  color: #ffffff;
+  font-family: 'Proxima Nova', sans-serif; 
+  text-shadow: 2px 2px 4px rgba(18, 48, 123, 0.5); 
+}
+
+.playlist-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-auto-rows: minmax(200px, auto); 
+  gap: 20px;
+}
+
+.playlist-card {
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer; /* Add cursor pointer */
+}
+
+.playlist-card:not(.selected):hover {
+  background-color: #555555;
+}
+
+.playlist-card h3 {
+  color: #ffffff;
+  margin-top: 0;
+}
+
+.playlist-card p {
+  color: #cccccc;
+  margin: 10px 0;
+}
+
+.playlist-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-auto-rows: minmax(200px, auto); 
+  gap: 20px;
+}
+
+.selected {
+  background-color: #1db954;
+  color: #ffffff;
+}
+
+.basic-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.basic-button:hover {
+  background-color: #24c964;
+}
+
+.logout-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logout-button:hover {
+  background-color: #24c964;
+}
+
+.clear {
+  clear: both;
+}
