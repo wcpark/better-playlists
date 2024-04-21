@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Track Names</title>
+    <style>
+        body {
+            background-color: black;
+            color: #cccccc;
+            font-family: 'Proxima Nova', sans-serif; /* Change the font family here */
+            text-shadow: 2px 2px 4px rgba(18, 48, 123, 0.5); /* Add text shadow */
+        }
+
+        .playlist-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            grid-auto-rows: minmax(200px, auto); /* Minimum height for rows */
+            gap: 20px;
+        }
+
+        .playlist-card {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .playlist-card h3 {
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .playlist-card p {
+            color: #cccccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Results</h1>
+    </header>
+    <main>
+        <h2>Quicksort:</h2>
+        <p>- Quicksort time: {{ json_data.quicksort_time }}</p>
+
+        <h2>Mergesort:</h2>
+        <p>- Mergesort time: {{ json_data.mergesort_time }}</p>
+        <div class="playlist-container">
+            {% for entry in json_data.formatted_results %}
+                <div class="playlist-card">
+                    <h3>{{ entry.playlist_name }}</h3>
+                    <p>{% for track in entry.track_set %}
+                        {{ track }}<br>
+                    {% endfor %}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>
