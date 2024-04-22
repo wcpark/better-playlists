@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Track Names</title>
+    <link rel="stylesheet" href="/Templates/styles.css">
+    <style>
+        /* Overrides */
+        .playlist-card {
+            background-color: #333333;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: default /* Add cursor pointer */
+        }
+
+        .playlist-card h3 {
+        color: #ffffff;
+        margin-top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .playlist-card h3 span:first-child {
+        margin-right: 20px;
+        }
+        
+        .playlist-card:not(.selected):hover {
+            background-color: #333333;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Results</h1>
+    </header>
+    <main>
+        <h2>Quicksort:</h2>
+        <p>- Quicksort time: {{ json_data.quicksort_time }}</p>
+
+        <h2>Mergesort:</h2>
+        <p>- Mergesort time: {{ json_data.mergesort_time }}</p>
+
+        <div class="playlist-container">
+            {% for entry in json_data.formatted_results %}
+                <div class="playlist-card">
+                    <h3>
+                        <span>{{ entry.playlist_name }}</span>
+                        <span style="margin-left: auto;">Match Percentage: {{ entry.match_percentage }}</span>
+                    </h3>
+                    <p>{% for track in entry.track_set %}
+                        {{ track }}<br>
+                    {% endfor %}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="clear"></div>
+        <a href="/get_playlists" class="basic-button">Select Another Playlist</a>
+        <a href="/logout" class="logout-button">Logout</a>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

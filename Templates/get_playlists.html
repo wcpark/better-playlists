@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Playlists</title>
+    <link rel="stylesheet" href="/Templates/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Select a Playlist and Press Go</h1>
+    </header>
+    <main>
+        <h2>Your Playlists:</h2>
+        <div class="playlist-container">
+            {% for name, url, id, tracks in playlists_info %}
+                <div class="playlist-card" id="{{ id }}" onclick="getTracks(this); return false;">
+                    <h3>{{ name }}</h3>
+                    <p>{% for track in tracks %}
+                        {{ track }}<br>
+                    {% endfor %}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="/list_tracks_info" class="basic-button">Go</a>
+        <a href="/logout" class="logout-button">Logout</a>
+    </main>
+    <footer>
+    </footer>
+
+    <script>
+        // Function to get tracks for a playlist
+        function getTracks(element) {
+            // Remove 'selected' class from all playlist cards
+            document.querySelectorAll('.playlist-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add 'selected' class to the clicked playlist card
+            element.classList.add('selected');
+            
+            // Get playlist ID
+            var playlistId = element.id;
+            
+            fetch('/get_tracks/' + playlistId)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Playlist tracks retrieved:', data.tracks_info);
+                    // Store or process the retrieved tracks information as needed
+                })
+                .catch(error => console.error('Error getting tracks:', error));
+        }
+    </script>
+</body>
+</html>

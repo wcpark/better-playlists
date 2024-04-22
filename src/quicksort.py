@@ -37,6 +37,7 @@ def partition(originalList, low, high):
     return lowPtr, highPtr
 
 
+# returns sorted list in ascneding order
 def quickSort(originalList, low, high):
     if low < high:
         leftPartition, rightPartition = partition(originalList, low, high)
@@ -50,6 +51,7 @@ def printList(originalList):
         print(i, end=" ")
 
 
+'''
 def main():
     # Example use
 
@@ -69,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''
